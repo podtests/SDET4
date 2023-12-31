@@ -7,10 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,6 +17,14 @@ import java.util.List;
 import java.util.Set;
 
 public class SeleniumDemo {
+
+    /*
+
+    SelectorHub Pop up - done
+    Iframes - done
+    Wait Mechansims: Implicit, Explicit, FluentWait - done
+    TestNg
+     */
 
     //Work with Different web elements:
         /*
@@ -64,11 +69,57 @@ public class SeleniumDemo {
         */
         //openURL(tabURL);
         //tabs();
-        selectorhubPopup();
+        //selectorhubPopup();
+        iFrames();
 
 
     }
 
+    public static void implicitWait() { //global all elements
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        wd.findElement(By.xpath("")).click();
+    }
+
+    public static void explicitWait() { //per element
+        WebDriverWait wait = new WebDriverWait(wd, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("")));
+        wd.findElement(By.xpath("")).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("")));
+        wd.findElement(By.xpath("")).click();
+
+    }
+
+    public static void fluentWait() { //per element
+        FluentWait wait2 = new FluentWait(wd);
+            wait2.withTimeout(Duration.ofSeconds(30))
+                    .pollingEvery(Duration.ofSeconds(5))
+                    .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("")));
+        wd.findElement(By.xpath("")).click();
+
+
+    }
+
+
+
+    public static void iFrames() throws InterruptedException {
+        wd.get("https://selectorshub.com/iframe-scenario/");
+        wd.manage().window().maximize();
+
+        FluentWait wait3 = new FluentWait(wd);
+        wait3.withTimeout(Duration.ofSeconds(30))
+            .pollingEvery(Duration.ofSeconds(5))
+            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='hfe-menu-item' and contains(text(),'Help')]")));
+
+
+        wd.switchTo().frame("pact1");
+        wd.findElement(By.xpath("//input[@id='inp_val']")).sendKeys("Akhil");
+        wd.switchTo().frame("pact2");
+        wd.findElement(By.xpath("//input[@id='jex']")).sendKeys("Jain");
+        wd.switchTo().parentFrame();
+        wd.findElement(By.xpath("//input[@id='inp_val']")).clear();
+        wd.findElement(By.xpath("//input[@id='inp_val']")).sendKeys("Akhil Jain");
+    }
     public static void closePopup() throws InterruptedException {
 
         wd.findElement(By.xpath("//input[@id='submit']")).click();
@@ -159,18 +210,24 @@ public class SeleniumDemo {
     public static void selectorhubPopup() {
         wd.get("https://selectorshub.com/xpath-practice-page/");
         wait = new WebDriverWait(wd, Duration.ofSeconds(30));
-
-        System.out.println("IsDisplayed:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isDisplayed());
-        System.out.println("IsDisplayed:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isEnabled());
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sgpb-popup-close-button-6")));
-
-        System.out.println("IsDisplayed2:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isDisplayed());
-        System.out.println("IsDisplayed2:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isEnabled());
-
         wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).click();
 
-        System.out.println("IsDisplayed3:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isDisplayed());
-        System.out.println("IsDisplayed3:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isEnabled());
+
+
+
+        //System.out.println("IsDisplayed:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isDisplayed());
+        //System.out.println("IsDisplayed:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isEnabled());
+
+
+
+        //System.out.println("IsDisplayed2:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isDisplayed());
+        //System.out.println("IsDisplayed2:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isEnabled());
+
+
+
+        //System.out.println("IsDisplayed3:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isDisplayed());
+        //System.out.println("IsDisplayed3:"+wd.findElement(By.cssSelector(".sgpb-popup-close-button-6")).isEnabled());
         //wait.until(ExpectedConditions.domPropertyToBe(By.xpath("//button[text()='Checkout here']")));
 
     }

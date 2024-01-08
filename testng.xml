@@ -2,9 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TS1">
     <test name="testcase">
+        <parameter name="email" value="akhiljda@gmail.com"></parameter>
+        <parameter name="pass" value="Password"></parameter>
         <classes>
-            <class name="in.podtest.AnnotationsDemo"></class>
-
+            <class name="in.podtest.TestNGDemo"></class>
         </classes>
     </test>
 </suite>

@@ -10,39 +10,31 @@ import org.testng.annotations.Test;
 
 public class TestNGDemo2 {
 
-    WebDriver wd = new ChromeDriver();
+    //WebDriver wd = WebDriverManager.getSession();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void preSteps() throws InterruptedException {
-        wd.get("https://demo.evershop.io/account/login");
+        WebDriverManager.getSession().get("https://demo.evershop.io/account/login");
 
         //Login
-        wd.findElement(By.xpath("//input[@name='email']")).sendKeys("akhiljda@gmail.com");
-        wd.findElement(By.xpath("//input[@name='password']")).sendKeys("Password");
-        wd.findElement(By.xpath("//button[@type='submit']")).click();
+
 
         Thread.sleep(4000);
     }
 
-    @Test(testName = "Verify View Cart Page")
-    public void testLogin() throws InterruptedException {
 
-        //View the cart [Main TestSteps]
-        wd.navigate().to("https://demo.evershop.io/cart");
-        String totalAmount = wd.findElement(By.xpath("//div[contains(@class,'grand-total-value')]")).getText(); //Actual Result: coming from UI
+    //Postive/Negative
+    //Sanity/Regression /Both
 
-        System.out.println("Total Amount is: "+totalAmount);
-        Assert.assertEquals(totalAmount,"$2,569.00" ); //
-
-        Thread.sleep(10000);
-
+    @Test(testName = "Negative Login Test", groups = {"Negative", "Sanity"}, priority = -1)
+    public void testNegativeLogin() throws InterruptedException {
+        WebDriver wd = WebDriverManager.getSession();
+        wd.findElement(By.xpath("//input[@name='email']")).sendKeys("akhiljda@gmail.com");
+        wd.findElement(By.xpath("//input[@name='password']")).sendKeys("hdgwdg");
+        wd.findElement(By.xpath("//button[@type='submit']")).click();
     }
 
-    @AfterMethod
-    public void postSteps() {
-        //post steps
-        wd.quit();
-    }
+
 
 
 }

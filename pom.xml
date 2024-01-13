@@ -46,7 +46,7 @@
         <version>3.2.3</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>testng.xml</suiteXmlFile>
+            <suiteXmlFile>testng-failed.xml</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
       </plugin>

@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TS1">
-    <test name="testcase">
+<suite name="TS1" parallel="tests" thread-count="2">
+
+    <test name="Chrome testcase">
+        <parameter name="browser" value="chrome"></parameter>
         <parameter name="email" value="akhiljda@gmail.com"></parameter>
         <parameter name="pass" value="Password"></parameter>
         <classes>
-            <class name="in.podtest.TestNGDemo"></class>
+            <class name="in.podtest.parallel.TestScenario1"></class>
+        </classes>
+    </test>
+
+    <test name="Firefox testcase">
+        <parameter name="browser" value="firefox"></parameter>
+        <parameter name="email" value="akhiljda@gmail.com"></parameter>
+        <parameter name="pass" value="Password"></parameter>
+        <classes>
+            <class name="in.podtest.parallel.TestScenario1"></class>
         </classes>
     </test>
 </suite>

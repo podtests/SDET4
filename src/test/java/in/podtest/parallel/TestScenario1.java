@@ -1,24 +1,26 @@
-package in.podtest;
+package in.podtest.parallel;
 
+import in.podtest.WebDriverManager;
+import in.podtest.WebDriverParallelManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
-public class TestNGDemo {
+public class TestScenario1 {
 
     public WebDriver wd ;
 
-    @BeforeSuite(alwaysRun = true)
-    public void beforeSuite() {
-       wd = WebDriverManager.createSession("chrome");
+    @Parameters({"browser"})
+    @BeforeTest(alwaysRun = true)
+    public void beforeTest(String browserName) {
+        wd = WebDriverParallelManager.createDriver(browserName);
     }
 
     @Parameters({"email", "pass"})
     @BeforeClass(alwaysRun = true)
     public void preSteps(String UN, String PW) throws InterruptedException {
+
         wd.get("https://demo.evershop.io/account/login");
 
         //Login
@@ -51,16 +53,6 @@ public class TestNGDemo {
 
         s1.assertAll();
 
-    }
-    @Test(testName = "Verify View  Page", priority=2)
-    public void test2() {
-        System.out.println("test2 executed!");
-    }
-
-    @AfterSuite(alwaysRun = true)
-    public void postSteps() {
-        //post steps
-        WebDriverManager.deleteSession();
     }
 
 

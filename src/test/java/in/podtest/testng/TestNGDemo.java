@@ -1,5 +1,6 @@
-package in.podtest;
+package in.podtest.testng;
 
+import in.podtest.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

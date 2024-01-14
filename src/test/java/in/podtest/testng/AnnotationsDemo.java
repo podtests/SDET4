@@ -1,4 +1,4 @@
-package in.podtest;
+package in.podtest.testng;
 
 import org.testng.annotations.*;
 

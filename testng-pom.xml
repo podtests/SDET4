@@ -3,12 +3,9 @@
 <suite name="TS1" parallel="tests" thread-count="2">
 
     <test name="Chrome testcase">
-        <parameter name="browser" value="chrome"></parameter>
-        <parameter name="email" value="akhiljda@gmail.com"></parameter>
-        <parameter name="pass" value="Password"></parameter>
         <parameter name="itemName" value="Nike air zoom pegasus 35"></parameter>
         <classes>
-            <class name="in.podtest.pomtest.E2ETest_Jira100_POM"></class>
+            <class name="in.podtest.pomtest.E2ETest_Jira100"></class>
         </classes>
     </test>
 

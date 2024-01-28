@@ -11,7 +11,7 @@ public class ItemPOM {
 
     WebDriver wd = null;
 
-    By qtyTextBox = By.xpath("//input[@name='qty']");
+    By qtyTextBox = By.cssSelector("//input[@name='qty']");
 
     public ItemPOM(WebDriver wd){
         this.wd = wd;

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TS1" parallel="tests" thread-count="2">
+
+    <test name="Chrome testcase">
+        <parameter name="itemName" value="Nike air zoom pegasus 35"></parameter>
+        <classes>
+            <class name="in.podtest.pomtest.E2ETest_Jira100"></class>
+        </classes>
+    </test>
+
+
+</suite>
